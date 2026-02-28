@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import productRoutes from "./routes/product.js";
 import categoryRoutes from "./routes/category.js";
+import { errors } from "celebrate";
 const PORT = process.env.PORT ?? 3000;
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 // routes
 app.use("/product", productRoutes);
 app.use("/category", categoryRoutes);
+app.use(errors());
 
 mongoose.connect("mongodb://localhost:27017/catalogdb");
 
