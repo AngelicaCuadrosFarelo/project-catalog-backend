@@ -4,8 +4,8 @@ import cors from "cors";
 import productRoutes from "./routes/product.js";
 import categoryRoutes from "./routes/category.js";
 import { errors } from "celebrate";
-import { loadEnvFile } from "node:process";
-loadEnvFile();
+//import { loadEnvFile } from "node:process";
+//loadEnvFile();
 const PORT = process.env.PORT ?? 3000;
 const DBPASSWORD = process.env.DB_PASSWORD;
 
