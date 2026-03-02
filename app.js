@@ -4,8 +4,9 @@ import cors from "cors";
 import productRoutes from "./routes/product.js";
 import categoryRoutes from "./routes/category.js";
 import { errors } from "celebrate";
-//import { loadEnvFile } from "node:process";
-//loadEnvFile();
+import { loadEnvFile } from "node:process";
+import { connect } from "node:http2";
+loadEnvFile();
 const PORT = process.env.PORT ?? 3000;
 const DBPASSWORD = process.env.DB_PASSWORD;
 
@@ -18,9 +19,16 @@ app.use("/product", productRoutes);
 app.use("/category", categoryRoutes);
 app.use(errors());
 
-mongoose.connect(
-  `mongodb+srv://angelica:${DBPASSWORD}@cluster0.wmzxtad.mongodb.net/?appName=Cluster0`,
-);
+mongoose
+  .connect(
+    `mongodb+srv://angelica:${DBPASSWORD}@cluster0.wmzxtad.mongodb.net/?appName=Cluster0`,
+  )
+  .then(() => {
+    console.log("conectado");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.listen(PORT, function () {
   console.log(`Servidor encendido en el puerto ${PORT}`);
